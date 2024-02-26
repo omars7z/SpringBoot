@@ -18,10 +18,24 @@ public class LoginController {
         User user = loginService.authenticate(username, password);
         if (user != null) {
             model.addAttribute("user", user);
-            return "redirect:/dashboard"; // Redirect to dashboard page after successful login
+            String redirectUrl = determineRedirectUrl(user.getRole());
+            return "redirect:" + redirectUrl;
         } else {
             model.addAttribute("error", "Invalid username or password");
             return "login"; // Redirect back to login page with error message
+        }
+    }
+
+    private String determineRedirectUrl(String role) {
+        switch (role) {
+            case "student":
+                return "/student";
+            case "instructor":
+                return "/instructor";
+            case "admin":
+                return "/admin";
+            default:
+                return "/";
         }
     }
 }
