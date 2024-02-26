@@ -5,9 +5,12 @@ import com.example.SpringBoot.Services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class LoginController {
 
     @Autowired
@@ -26,12 +29,17 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/hello")
+    public String login(){
+        return "login";
+    }
+
     private String determineRedirectUrl(String role) {
         switch (role) {
             case "student":
-                return "/student";
+                return "/students";
             case "instructor":
-                return "/instructor";
+                return "/instructors";
             case "admin":
                 return "/admin";
             default:

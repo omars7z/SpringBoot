@@ -1,6 +1,6 @@
 package com.example.SpringBoot.Controller;
 
-import com.example.SpringBoot.Data.DAO;
+import com.example.SpringBoot.Data.GradesDAOImpl;
 import com.example.SpringBoot.Entities.Grade;
 import com.example.SpringBoot.Services.GradeServices;
 import org.springframework.beans.factory.annotation.Autowired;

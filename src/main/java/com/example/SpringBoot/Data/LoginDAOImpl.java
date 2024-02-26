@@ -19,6 +19,7 @@ public class LoginDAOImpl implements LoginDAO {
     public User authenticate(String username, String password) {
         String query = "SELECT * FROM users WHERE username = ? AND password = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{username, password}, new UserRowMapper());
+//        return true;
     }
 
     private static class UserRowMapper implements RowMapper<User> {
