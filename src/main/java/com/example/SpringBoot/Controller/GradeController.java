@@ -4,6 +4,7 @@ import com.example.SpringBoot.Data.GradesDAOImpl;
 import com.example.SpringBoot.Entities.Grade;
 import com.example.SpringBoot.Services.GradeServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,4 +53,29 @@ public class GradeController {
         gradeService.deleteGrade(gradeId);
         return "redirect:/grades"; // Redirect to the grades page after deleting the grade
     }
+
+    @GetMapping("/class-average")
+    public ResponseEntity<Double> getClassAverage() {
+        double classAverage = gradeService.getClassAverage();
+        return ResponseEntity.ok(classAverage);
+    }
+
+    @GetMapping("/class-median")
+    public ResponseEntity<Double> getClassMedian() {
+        double classMedian = gradeService.getClassMedian();
+        return ResponseEntity.ok(classMedian);
+    }
+
+    @GetMapping("/highest-grade")
+    public ResponseEntity<Grade> getHighestGrade() {
+        Grade highestGrade = gradeService.getHighestGrade();
+        return ResponseEntity.ok(highestGrade);
+    }
+
+    @GetMapping("/lowest-grade")
+    public ResponseEntity<Grade> getLowestGrade() {
+        Grade lowestGrade = gradeService.getLowestGrade();
+        return ResponseEntity.ok(lowestGrade);
+    }
+
 }

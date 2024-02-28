@@ -37,11 +37,11 @@ public class LoginController {
     private String determineRedirectUrl(String role) {
         switch (role) {
             case "student":
-                return "http://localhost:8080/students";
+                return "http://localhost:8080/login/students";
             case "instructor":
-                return "http://localhost:8080/instructors";
+                return "http://localhost:8080/login/instructors";
             case "admin":
-                return "http://localhost:8080/admin";
+                return "http://localhost:8080/login/admin";
             default:
                 return "/";
         }

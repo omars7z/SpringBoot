@@ -1,3 +1,4 @@
+<jsp:useBean id="student" scope="request" type="com.example.SpringBoot.Entities.Student"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

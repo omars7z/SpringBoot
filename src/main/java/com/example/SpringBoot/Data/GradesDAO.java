@@ -15,4 +15,12 @@ public interface GradesDAO {
 
     Grade getGradeById(int gradeId);
 
+    double getClassAverage();
+
+    double getClassMedian();
+
+    Grade getHighestGrade();
+
+    Grade getLowestGrade();
+
 }
