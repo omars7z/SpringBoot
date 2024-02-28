@@ -16,8 +16,8 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping("/login")
-    public String login(String username, String password, Model model) {
+    @PostMapping("/login") // This handles the POST request for login
+    public String handleLogin(String username, String password, Model model) {
         User user = loginService.authenticate(username, password);
         if (user != null) {
             model.addAttribute("user", user);
@@ -29,19 +29,19 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/hello")
-    public String login(){
+    @GetMapping("/login") // This handles the GET request for login
+    public String showLoginForm(){
         return "login";
     }
 
     private String determineRedirectUrl(String role) {
         switch (role) {
             case "student":
-                return "/students";
+                return "http://localhost:8080/students";
             case "instructor":
-                return "/instructors";
+                return "http://localhost:8080/instructors";
             case "admin":
-                return "/admin";
+                return "http://localhost:8080/admin";
             default:
                 return "/";
         }

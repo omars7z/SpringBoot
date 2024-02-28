@@ -11,7 +11,7 @@ public class HomeController {
 
     @GetMapping()
     public String home(Model model) {
-        model.addAttribute("message", "Welcome to the Student Grading System!");
+        model.addAttribute("message", "This is a message from model.attribute");
         return "home";
     }
 
