@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Grades</title>
+    <title>Grade Management</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        form {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<h1>YES</h1>
+<div class="container">
+    <h2>Grade Management</h2>
+    <form action="/api/dao/grades" method="post">
+        <label for="grade">Grade:</label>
+        <input type="number" id="grade" name="grade" required>
+        <button type="submit">Add Grade</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Grade ID</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+        <!-- Populate table with grades -->
+        <tr th:each="grade : ${grades}">
+            <td th:text="${grade.gradeId}"></td>
+            <td th:text="${grade.grade}"></td>
+            <td>
+                <form action="/api/dao/grades/{gradeId}" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="number" name="grade" value="${grade.grade}">
+                    <button type="submit">Update</button>
+                </form>
+                <form action="/api/dao/grades/{gradeId}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Class Statistics</h3>
+    <p>Class Average: <span th:text="${classAverage}"></span></p>
+    <p>Class Median: <span th:text="${classMedian}"></span></p>
+    <p>Highest Grade: <span th:text="${highestGrade.grade}"></span></p>
+    <p>Lowest Grade: <span th:text="${lowestGrade.grade}"></span></p>
+</div>
 </body>
 </html>

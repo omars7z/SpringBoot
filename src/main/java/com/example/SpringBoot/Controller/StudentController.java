@@ -27,7 +27,7 @@ public class StudentController {
     public String getStudentById(@PathVariable("studentId") int studentId, Model model) {
         Student student = studentService.getStudentById(studentId);
         model.addAttribute("student", student);
-        return "studentDetails"; // Assuming you have a studentDetails.jsp or studentDetails.html in your views folder
+        return "studentDetails"; // Assuming you have a studentDetails.html or studentDetails.html in your views folder
     }
 
     @PostMapping
