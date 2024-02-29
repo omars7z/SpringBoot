@@ -9,7 +9,7 @@
 <h1>Welcome, ${user.username}!</h1>
 <h2>Add User</h2>
 <!-- Form to add a new user -->
-<form action="../api/users" method="post">
+<form action="../api/admin/users" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">
     <label for="password">Password:</label>
@@ -24,7 +24,7 @@
 </form>
 <h2>Delete User</h2>
 <!-- Form to delete a user -->
-<form action="../api/users" method="delete">
+<form action="../api/admin" method="post">
     <label for="userId">User ID:</label>
     <input type="text" id="userId" name="userId">
     <button type="submit">Delete User</button>

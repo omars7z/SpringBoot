@@ -16,7 +16,6 @@ public class Grade {
         this.grade = grade;
     }
 
-    // Getters and setters
     public int getGradeId() {
         return gradeId;
     }

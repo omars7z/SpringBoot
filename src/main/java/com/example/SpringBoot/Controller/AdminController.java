@@ -18,7 +18,7 @@ public class AdminController {
     @Autowired
     private Credentials credentials;
 
-    @GetMapping("/api/admin")
+    @GetMapping("")
     public String showLoginForm(){
         return "admin";
     }
@@ -34,12 +34,12 @@ public class AdminController {
         }
 
         adminService.addUser(user);
-        return "redirect:/admin"; // back to page
+        return "redirect:/api/admin"; // back to page
     }
 
     @DeleteMapping("/users/{userId}")
     public String deleteUser(@PathVariable("userId") int userId) {
         adminService.deleteUser(userId);
-        return "redirect:/admin"; // back to page
+        return "redirect:/api/admin"; // back to page
     }
 }
