@@ -1,0 +1,26 @@
+<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Grades</title>
+</head>
+<body>
+<h1>Welcome, ${user.username}!</h1>
+<h2>Add Grades</h2>
+<!-- Form to add grades -->
+<form action="../api/dao/grades" method="post">
+    <label for="course">Course:</label>
+    <input type="text" id="course" name="course">
+    <label for="grade">Grade:</label>
+    <input type="text" id="grade" name="grade">
+    <button type="submit">Add Grade</button>
+</form>
+<h2>Grades Statistics</h2>
+<!-- Display statistics like class average, median, highest, and lowest marks here -->
+<p>Class Average: ${classAverage}</p>
+<p>Median: ${median}</p>
+<p>Highest Mark: ${highestMark}</p>
+<p>Lowest Mark: ${lowestMark}</p>
+</body>
+</html>
