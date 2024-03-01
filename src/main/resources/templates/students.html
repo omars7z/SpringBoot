@@ -1,29 +1,23 @@
-<!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Marks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grades and Statistics</title>
 </head>
 <body>
-<h1>Student Marks</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Course Name</th>
-        <th>Marks</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="grade : ${grades}">
-        <td th:text="${grade.courseId}"></td>
-        <td th:text="${grade.grade}"></td>
-    </tr>
-    </tbody>
-</table>
-<h2>Grades Statistics</h2>
-<p>Class Average: <span th:text="${classAverage}"></span></p>
-<p>Median: <span th:text="${classMedian}"></span></p>
-<p>Highest Mark: <span th:text="${highestGrade.grade}"></span></p>
-<p>Lowest Mark: <span th:text="${lowestGrade.grade}"></span></p>
+<h1>Welcome to Student Grades and Statistics</h1>
+
+<h2>Select Your Grades to View</h2>
+<form action="/api/students/{studentId}/view-grades" method="get">
+    <label for="studentId">Enter your Student ID:</label><br>
+    <input type="text" id="studentId" name="studentId"><br><br>
+    <input type="submit" value="View Grades">
+</form>
+
+<h2>Class Statistics</h2>
+<form action="/api/students/statistics" method="get">
+    <input type="submit" value="View Class Statistics">
+</form>
 </body>
 </html>
