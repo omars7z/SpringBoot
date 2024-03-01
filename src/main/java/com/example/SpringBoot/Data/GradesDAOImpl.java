@@ -47,6 +47,12 @@ public class GradesDAOImpl implements GradesDAO {
         String query = "DELETE FROM grades WHERE grade_id = ?";
         jdbcTemplate.update(query, gradeId);
     }
+    @Override
+    public List<Grade> getGradesByStudentId(int studentId) {
+        String query = "SELECT * FROM grades WHERE student_id = ?";
+        return jdbcTemplate.query(query, new Object[]{studentId}, new GradeRowMapper());
+    }
+
 
     @Override
     public double getClassAverage() {

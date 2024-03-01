@@ -30,19 +30,4 @@ public class StudentService {
         return gradesDAOImpl.getGradeById(gradeId);
     }
 
-    public double getClassAverage() {
-        return gradesDAOImpl.getClassAverage();
-    }
-
-    public double getClassMedian() {
-        return gradesDAOImpl.getClassMedian();
-    }
-
-    public Grade getHighestGrade() {
-        return gradesDAOImpl.getHighestGrade();
-    }
-
-    public Grade getLowestGrade() {
-        return gradesDAOImpl.getLowestGrade();
-    }
 }

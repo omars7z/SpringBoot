@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Grades</title>
+</head>
+<body>
+<h1>Your Grades</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Grade ID</th>
+        <th>Student ID</th>
+        <th>Course ID</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Use Thymeleaf or other templating engine to loop through grades -->
+    <tr th:each="grade : ${grades}">
+        <td th:text="${grade.gradeId}"></td>
+        <td th:text="${grade.studentId}"></td>
+        <td th:text="${grade.courseId}"></td>
+        <td th:text="${grade.grade}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

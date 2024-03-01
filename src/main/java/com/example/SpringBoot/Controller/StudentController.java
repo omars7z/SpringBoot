@@ -22,8 +22,6 @@ public class StudentController {
     @Autowired
     private GradeServices gradeServices;
 
-
-
     @GetMapping("")
     public String showStudentDashboard(){
         return "students";
@@ -34,6 +32,13 @@ public class StudentController {
         Student student = studentService.getStudentById(studentId);
         model.addAttribute("student", student);
         return "studentDetails"; //  studentDetails.html
+    }
+
+    @GetMapping("/{studentId}/grades")
+    public String getStudentGrades(@PathVariable("studentId") int studentId, Model model) {
+        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
+        model.addAttribute("grades", grades);
+        return "view-grades"; // view-grades.html
     }
 
     @GetMapping("/statistics")
@@ -50,7 +55,6 @@ public class StudentController {
 
         return "statistics"; // statistics.html in views folder
     }
-
 }
 //    @PostMapping
 //    public String addStudent(@ModelAttribute("student") Student student) {
@@ -68,10 +72,4 @@ public class StudentController {
 //            studentService.updateStudent(student);
 //        }
 //        return "redirect:/students"; // Redirect to the students page after updating the student
-//    }
-//
-//    @DeleteMapping("/{studentId}")
-//    public String deleteStudent(@PathVariable("studentId") int studentId) {
-//        studentService.deleteStudent(studentId);
-//        return "redirect:/students"; // Redirect to the students page after deleting the student
 //    }

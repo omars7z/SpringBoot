@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistics</title>
+    <title>Class Statistics</title>
 </head>
 <body>
-<h1>Statistics</h1>
-<div>
-    <h2>Class Average: ${classAverage}</h2>
-    <h2>Class Median: ${classMedian}</h2>
-    <h2>Highest Grade:</h2>
-    <p>Student ID: ${highestGrade.studentId}</p>
-    <p>Course ID: ${highestGrade.courseId}</p>
-    <p>Grade: ${highestGrade.grade}</p>
-    <h2>Lowest Grade:</h2>
-    <p>Student ID: ${lowestGrade.studentId}</p>
-    <p>Course ID: ${lowestGrade.courseId}</p>
-    <p>Grade: ${lowestGrade.grade}</p>
-</div>
+<h1>Class Statistics</h1>
+
+<p>Class Average: <span th:text="${classAverage}"></span></p>
+<p>Class Median: <span th:text="${classMedian}"></span></p>
+<p>Highest Grade:</p>
+<ul>
+    <li>Grade ID: <span th:text="${highestGrade.gradeId}"></span></li>
+    <li>Student ID: <span th:text="${highestGrade.studentId}"></span></li>
+    <li>Course ID: <span th:text="${highestGrade.courseId}"></span></li>
+    <li>Grade: <span th:text="${highestGrade.grade}"></span></li>
+</ul>
+<p>Lowest Grade:</p>
+<ul>
+    <li>Grade ID: <span th:text="${lowestGrade.gradeId}"></span></li>
+    <li>Student ID: <span th:text="${lowestGrade.studentId}"></span></li>
+    <li>Course ID: <span th:text="${lowestGrade.courseId}"></span></li>
+    <li>Grade: <span th:text="${lowestGrade.grade}"></span></li>
+</ul>
 </body>
 </html>

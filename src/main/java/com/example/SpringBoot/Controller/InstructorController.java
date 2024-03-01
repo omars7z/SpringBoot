@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/instructor")
+@RequestMapping("/api/instructors")
 public class InstructorController {
 
     @Autowired
@@ -27,24 +27,22 @@ public class InstructorController {
     @PostMapping("/grades")
     public String addGrade(@ModelAttribute("grade") Grade grade) {
         instructorService.addGrade(grade);
-        return "redirect:/api/instructor";
+        return "redirect:/api/instructors";
     }
 
-
-
     @PutMapping("/grades/{gradeId}")
-    public String updateGrade(@PathVariable("gradeId") int gradeId, @ModelAttribute("grade") Grade updatedGrade) {
+    public String updateGrade(@PathVariable("gradeId") int gradeId, @RequestBody Grade updatedGrade) {
         Grade grade = gradeServices.getGradeById(gradeId);
         if (grade != null) {
             grade.setGrade(updatedGrade.getGrade());
             instructorService.updateGrade(grade);
         }
-        return "redirect:/grades";
+        return "redirect:/api/instructors";
     }
 
     @DeleteMapping("/grades/{gradeId}")
     public String deleteGrade(@PathVariable("gradeId") int gradeId) {
         instructorService.deleteGrade(gradeId);
-        return "redirect:/api/instructor";
+        return "redirect:/api/instructors";
     }
 }

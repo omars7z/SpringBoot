@@ -68,6 +68,11 @@ public class GradeServices {
         return statistics;
     }
 
+    public List<Grade> getGradesByStudentId(int studentId) {
+        return gradesDAOImpl.getGradesByStudentId(studentId);
+    }
+
+
     private static class GradeRowMapper implements RowMapper<Grade> {
         @Override
         public Grade mapRow(ResultSet rs, int rowNum) throws SQLException {

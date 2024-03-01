@@ -9,7 +9,7 @@
 <h2>Add Grade</h2>
 
 <!-- Form to add a new grade -->
-<form action="../api/dao/grades" method="post">
+<form action="../api/instructors/grades" method="post">
     <label for="studentId">Student ID:</label>
     <input type="text" id="studentId" name="studentId">
     <label for="courseId">Course ID:</label>
@@ -22,7 +22,7 @@
 <h2>Update Grade</h2>
 
 <!-- Form to update a grade -->
-<form action="../api/instructor/grades/{gradeId}" method="put">
+<form action="../api/instructors/grades/{gradeId}" method="post">
     <label for="updatedStudentId">Updated Student ID:</label>
     <input type="text" id="updatedStudentId" name="studentId">
     <label for="updatedCourseId">Updated Course ID:</label>
@@ -35,16 +35,45 @@
 <h2>Delete Grade</h2>
 
 <!-- Form to delete a grade -->
-<form action="../api/dao/grades/{gradeId}" method="delete">
+<form id="deleteGradeForm">
     <label for="gradeId">Grade ID:</label>
     <input type="text" id="gradeId" name="gradeId">
-    <button type="submit">Delete Grade</button>
+    <button type="button" onclick="deleteGrade()">Delete Grade</button>
 </form>
+
+<script>
+    function deleteGrade() {
+        const gradeIdToDelete = document.getElementById("gradeId").value;
+
+        if (!gradeIdToDelete) {
+            alert("Please enter a Grade ID to delete.");
+            return;
+        }
+        fetch(`/api/instructors/grades/${gradeIdToDelete}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Delete successful', data);
+                alert('Delete successful');
+            })
+            .catch(error => {
+            });
+    }
+</script>
 <h2>Grades Statistics</h2>
 <!-- Display statistics like class average, median, highest, and lowest marks here -->
-<p>Class Average: ${classAverage}</p>
-<p>Median: ${median}</p>
-<p>Highest Mark: ${highestMark}</p>
-<p>Lowest Mark: ${lowestMark}</p>
+<!--<p>Class Average: ${classAverage}</p>-->
+<!--<p>Median: ${median}</p>-->
+<!--<p>Highest Mark: ${highestMark}</p>-->
+<!--<p>Lowest Mark: ${lowestMark}</p>-->
 </body>
 </html>
