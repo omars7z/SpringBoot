@@ -44,32 +44,15 @@ public class StudentController {
     @GetMapping("/statistics")
     public String getStatistics(Model model) {
         double classAverage = gradeServices.getClassAverage();
-        double classMedian = gradeServices.getClassMedian();
+//        double classMedian = gradeServices.getClassMedian();
         Grade highestGrade = gradeServices.getHighestGrade();
         Grade lowestGrade = gradeServices.getLowestGrade();
 
         model.addAttribute("classAverage", classAverage);
-        model.addAttribute("classMedian", classMedian);
+//        model.addAttribute("classMedian", classMedian);
         model.addAttribute("highestGrade", highestGrade);
         model.addAttribute("lowestGrade", lowestGrade);
 
         return "statistics"; // statistics.html in views folder
     }
 }
-//    @PostMapping
-//    public String addStudent(@ModelAttribute("student") Student student) {
-//        studentService.addStudent(student);
-//        return "redirect:/students"; // Redirect to the students page after adding the student
-//    }
-//
-//    @PutMapping("/{studentId}")
-//    public String updateStudent(@PathVariable("studentId") int studentId, @ModelAttribute("student") Student updatedStudent) {
-//        Student student = studentService.getStudentById(studentId);
-//        if (student != null) {
-//            student.setName(updatedStudent.getName());
-//            student.setUsername(updatedStudent.getUsername());
-//            student.setPassword(updatedStudent.getPassword());
-//            studentService.updateStudent(student);
-//        }
-//        return "redirect:/students"; // Redirect to the students page after updating the student
-//    }

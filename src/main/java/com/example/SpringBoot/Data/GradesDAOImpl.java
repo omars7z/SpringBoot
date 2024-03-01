@@ -62,9 +62,14 @@ public class GradesDAOImpl implements GradesDAO {
 
     @Override
     public double getClassMedian() {
-        // sort half and the one int hje middle
-        String query = "SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY grade) FROM grades";
-        return jdbcTemplate.queryForObject(query, Double.class);
+//        String query = "SELECT grade\n" +
+//                "FROM grades\n" +
+//                "ORDER BY grade\n" +
+//                "LIMIT 1\n" +
+//                "OFFSET (SELECT COUNT(*) FROM grades) / 2\n";
+//        return jdbcTemplate.queryForObject(query, Double.class);
+//        return stati;
+        return 0.0;
     }
 
     @Override

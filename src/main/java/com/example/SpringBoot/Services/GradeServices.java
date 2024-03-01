@@ -29,12 +29,16 @@ public class GradeServices {
         return gradesDAOImpl.getGradeById(gradeId);
     }
 
+    public List<Grade> getGradesByStudentId(int studentId) {
+        return gradesDAOImpl.getGradesByStudentId(studentId);
+    }
+
     public double getClassAverage() {
         return gradesDAOImpl.getClassAverage();
     }
 
     public double getClassMedian() {
-        return gradesDAOImpl.getClassMedian();
+        return getClassMedian();
     }
 
     public Grade getHighestGrade() {
@@ -51,27 +55,30 @@ public class GradeServices {
         Statistics statistics = new Statistics();
 
         List<Double> listOfGrades = new ArrayList<>();
-        for(int i=0; i< grades.size(); i++){
+        for (int i=0; i< grades.size(); i++) {
             listOfGrades.add(grades.get(i).getGrade());
         }
         Collections.sort(listOfGrades);
         statistics.setMin(listOfGrades.get(0));
         statistics.setMax(listOfGrades.get(grades.size())-1);
-
         statistics.setMax(listOfGrades.get(grades.size())/2);
+
         double sum =0;
-        for(int i=0; i< grades.size(); i++){
+        for (int i=0; i< grades.size(); i++){
             sum += grades.get(i).getGrade();
         }
         statistics.setAverage(sum/2);
 
         return statistics;
     }
-
-    public List<Grade> getGradesByStudentId(int studentId) {
-        return gradesDAOImpl.getGradesByStudentId(studentId);
+    private double calculateMedian(List<Double> grades) {
+        int size = grades.size();
+        if (size % 2 == 0) {
+            return (grades.get(size / 2 - 1) + grades.get(size / 2)) / 2.0;
+        } else {
+            return grades.get(size / 2);
+        }
     }
-
 
     private static class GradeRowMapper implements RowMapper<Grade> {
         @Override
