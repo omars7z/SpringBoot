@@ -6,10 +6,13 @@
     <title>Grade Details</title>
 </head>
 <body>
-    <h2>Grade Details</h2>
-    <div>
-        <h3>Course Name: ${grade.courseName}</h3>
-        <h3>Grade: ${grade.grade}</h3>
-    </div>
+<h2>Grade Details</h2>
+<div>
+    <p>Grade ID: <span th:text="${grade.gradeId}"></span></p>
+    <p>Student ID: <span th:text="${grade.studentId}"></span></p>
+    <p>Course ID: <span th:text="${grade.courseId}"></span></p>
+    <p>Grade: <span th:text="${grade.grade}"></span></p>
+</div>
+
 </body>
 </html>

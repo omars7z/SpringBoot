@@ -28,23 +28,6 @@ public class StudentDAOImpl implements StudentDAO {
         return jdbcTemplate.queryForObject(query, new Object[]{studentId}, new StudentRowMapper());
     }
 
-    @Override
-    public void addStudent(Student student) {
-        String query = "INSERT INTO students (name, username, password) VALUES (?, ?, ?)";
-        jdbcTemplate.update(query, student.getName(), student.getUsername(), student.getPassword());
-    }
-
-    @Override
-    public void updateStudent(Student student) {
-        String query = "UPDATE students SET name = ?, username = ?, password = ? WHERE student_id = ?";
-        jdbcTemplate.update(query, student.getName(), student.getUsername(), student.getPassword(), student.getStudentId());
-    }
-
-    @Override
-    public void deleteStudent(int studentId) {
-        String query = "DELETE FROM students WHERE student_id = ?";
-        jdbcTemplate.update(query, studentId);
-    }
 
     private static class StudentRowMapper implements RowMapper<Student> {
         @Override

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Marks</title>
-
 </head>
 <body>
 <h1>Student Marks</h1>
@@ -15,16 +14,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="mark : ${courses}">
-        <td th:text="${mark.name}"></td>
-        <td th:text="${mark.mark}"></td>
+    <tr th:each="grade : ${grades}">
+        <td th:text="${grade.courseId}"></td>
+        <td th:text="${grade.grade}"></td>
     </tr>
-    <h2>Grades Statistics</h2>
-    <p>Class Average: ${classAverage}</p>
-    <p>Median: ${median}</p>
-    <p>Highest Mark: ${highestMark}</p>
-    <p>Lowest Mark: ${lowestMark}</p>
     </tbody>
 </table>
+<h2>Grades Statistics</h2>
+<p>Class Average: <span th:text="${classAverage}"></span></p>
+<p>Median: <span th:text="${classMedian}"></span></p>
+<p>Highest Mark: <span th:text="${highestGrade.grade}"></span></p>
+<p>Lowest Mark: <span th:text="${lowestGrade.grade}"></span></p>
 </body>
 </html>

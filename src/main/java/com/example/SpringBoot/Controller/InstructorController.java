@@ -1,37 +1,50 @@
-//package com.example.SpringBoot.Controller;
-//
-//import com.example.SpringBoot.Entities.Grade;
-////import com.example.SpringBoot.Services.InstructorServices;
-//import com.example.SpringBoot.Security.Credentials;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.*;
-//
-//@Controller
-//@RequestMapping("/api/instructor")
-//public class InstructorController {
-//
-//    @Autowired
-//    private InstructorServices instructorService;
-//
-//    @Autowired
-//    private Credentials credentials;
-//
-//    @GetMapping("/add-grade")
-//    public String showAddGradeForm(){
-//        return "add-grade"; // Assuming you have an HTML template for adding grades
-//    }
-//
-//    @PostMapping("/grades")
-//    public String addGrade(@ModelAttribute("grade") Grade grade) {
-//        instructorService.addGrade(grade);
-//        return "redirect:/instructor"; // Redirect to instructor dashboard or any other page
-//    }
-//
-//    @DeleteMapping("/grades/{gradeId}")
-//    public String deleteGrade(@PathVariable("gradeId") int gradeId) {
-//        instructorService.deleteGrade(gradeId);
-//        return "redirect:/instructor"; // Redirect to instructor dashboard or any other page
-//    }
-//}
+package com.example.SpringBoot.Controller;
+
+import com.example.SpringBoot.Entities.Grade;
+import com.example.SpringBoot.Security.Credentials;
+
+import com.example.SpringBoot.Services.GradeServices;
+import com.example.SpringBoot.Services.InstructorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/api/instructor")
+public class InstructorController {
+
+    @Autowired
+    private InstructorService instructorService;
+
+    @Autowired
+    private GradeServices gradeServices;
+
+    @GetMapping("")
+    public String showLoginForm(){
+        return "instructor";
+    }
+
+    @PostMapping("/grades")
+    public String addGrade(@ModelAttribute("grade") Grade grade) {
+        instructorService.addGrade(grade);
+        return "redirect:/api/instructor";
+    }
+
+
+
+    @PutMapping("/grades/{gradeId}")
+    public String updateGrade(@PathVariable("gradeId") int gradeId, @ModelAttribute("grade") Grade updatedGrade) {
+        Grade grade = gradeServices.getGradeById(gradeId);
+        if (grade != null) {
+            grade.setGrade(updatedGrade.getGrade());
+            instructorService.updateGrade(grade);
+        }
+        return "redirect:/grades";
+    }
+
+    @DeleteMapping("/grades/{gradeId}")
+    public String deleteGrade(@PathVariable("gradeId") int gradeId) {
+        instructorService.deleteGrade(gradeId);
+        return "redirect:/api/instructor";
+    }
+}

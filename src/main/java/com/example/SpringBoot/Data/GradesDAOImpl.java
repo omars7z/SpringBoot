@@ -24,9 +24,11 @@ public class GradesDAOImpl implements GradesDAO {
 
     @Override
     public Grade getGradeById(int gradeId) {
-        String query = "SELECT * FROM grades WHERE grade_id = ?";
-        return jdbcTemplate.queryForObject(query, new Object[]{gradeId}, new GradeRowMapper());
+        String sql = "SELECT * FROM grades WHERE grade_id = ?";
+        List<Grade> grades = jdbcTemplate.query(sql, new Object[]{gradeId}, new GradeRowMapper());
+        return grades.isEmpty() ? null : grades.get(0);
     }
+
 
     @Override
     public void addGrade(Grade grade) {

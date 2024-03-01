@@ -1,6 +1,8 @@
 package com.example.SpringBoot.Services;
 
+import com.example.SpringBoot.Data.GradesDAOImpl;
 import com.example.SpringBoot.Data.StudentDAO;
+import com.example.SpringBoot.Entities.Grade;
 import com.example.SpringBoot.Entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ public class StudentService {
     @Autowired
     private StudentDAO studentDAO;
 
+    @Autowired
+    private GradesDAOImpl gradesDAOImpl;
+
     public List<Student> getAllStudents() {
         return studentDAO.getAllStudents();
     }
@@ -21,15 +26,23 @@ public class StudentService {
         return studentDAO.getStudentById(studentId);
     }
 
-    public void addStudent(Student student) {
-        studentDAO.addStudent(student);
+    public Grade getGradeById(int gradeId) {
+        return gradesDAOImpl.getGradeById(gradeId);
     }
 
-    public void updateStudent(Student student) {
-        studentDAO.updateStudent(student);
+    public double getClassAverage() {
+        return gradesDAOImpl.getClassAverage();
     }
 
-    public void deleteStudent(int studentId) {
-        studentDAO.deleteStudent(studentId);
+    public double getClassMedian() {
+        return gradesDAOImpl.getClassMedian();
+    }
+
+    public Grade getHighestGrade() {
+        return gradesDAOImpl.getHighestGrade();
+    }
+
+    public Grade getLowestGrade() {
+        return gradesDAOImpl.getLowestGrade();
     }
 }

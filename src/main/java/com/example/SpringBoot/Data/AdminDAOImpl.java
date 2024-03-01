@@ -20,7 +20,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void deleteUser(int userId) {
-        String query = "DELETE FROM users WHERE user_id = ?";
+        String query = "DELETE FROM users WHERE id = ?";
         jdbcTemplate.update(query, userId);
     }
 }

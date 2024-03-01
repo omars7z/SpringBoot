@@ -1,4 +1,3 @@
-<!--<%&#45;&#45;<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>&#45;&#45;%>-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +5,10 @@
     <title>Manage Users</title>
 </head>
 <body>
-<h1>Welcome, ${user.username}!</h1>
+<h1>Admin Dashboard</h1>
 <h2>Add User</h2>
-<!-- Form to add a new user -->
+
+<!-- form to add a new user -->
 <form action="../api/admin/users" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">
@@ -23,11 +23,46 @@
     <button type="submit">Add User</button>
 </form>
 <h2>Delete User</h2>
-<!-- Form to delete a user -->
-<form action="../api/admin" method="post">
+
+<!-- form to delete a user -->
+<form id="deleteUser">
     <label for="userId">User ID:</label>
     <input type="text" id="userId" name="userId">
-    <button type="submit">Delete User</button>
+    <button type="button" onclick="deleteData()">Delete User</button>
 </form>
+<script>
+    function deleteData() {
+        const idToDelete = document.getElementById("userId").value;
+
+        if (!idToDelete) {
+            alert("Please enter an ID to delete.");
+            return;
+        }
+
+        // Make the DELETE request
+        fetch(`/api/admin/delete/user/${idToDelete}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle success response
+                console.log('Delete successful', data);
+                alert('Delete successful');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('There was a problem with the delete request:');
+                alert( error);
+            });
+    }
+</script>
 </body>
 </html>

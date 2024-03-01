@@ -37,9 +37,10 @@ public class AdminController {
         return "redirect:/api/admin"; // back to page
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/delete/user/{userId}")
     public String deleteUser(@PathVariable("userId") int userId) {
         adminService.deleteUser(userId);
         return "redirect:/api/admin"; // back to page
     }
+
 }

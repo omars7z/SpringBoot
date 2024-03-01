@@ -1,20 +1,44 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Add Grades</title>
+    <title>Manage Grades</title>
 </head>
 <body>
-<h1>Welcome, ${user.username}!</h1>
-<h2>Add Grades</h2>
-<!-- Form to add grades -->
+<h1> Instructor Dashboard</h1>
+<h2>Add Grade</h2>
+
+<!-- Form to add a new grade -->
 <form action="../api/dao/grades" method="post">
-    <label for="course">Course:</label>
-    <input type="text" id="course" name="course">
+    <label for="studentId">Student ID:</label>
+    <input type="text" id="studentId" name="studentId">
+    <label for="courseId">Course ID:</label>
+    <input type="text" id="courseId" name="courseId">
     <label for="grade">Grade:</label>
     <input type="text" id="grade" name="grade">
     <button type="submit">Add Grade</button>
+</form>
+
+<h2>Update Grade</h2>
+
+<!-- Form to update a grade -->
+<form action="../api/instructor/grades/{gradeId}" method="put">
+    <label for="updatedStudentId">Updated Student ID:</label>
+    <input type="text" id="updatedStudentId" name="studentId">
+    <label for="updatedCourseId">Updated Course ID:</label>
+    <input type="text" id="updatedCourseId" name="courseId">
+    <label for="updatedGrade">Updated Grade:</label>
+    <input type="text" id="updatedGrade" name="grade">
+    <button type="submit">Update Grade</button>
+</form>
+
+<h2>Delete Grade</h2>
+
+<!-- Form to delete a grade -->
+<form action="../api/dao/grades/{gradeId}" method="delete">
+    <label for="gradeId">Grade ID:</label>
+    <input type="text" id="gradeId" name="gradeId">
+    <button type="submit">Delete Grade</button>
 </form>
 <h2>Grades Statistics</h2>
 <!-- Display statistics like class average, median, highest, and lowest marks here -->

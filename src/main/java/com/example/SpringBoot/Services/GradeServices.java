@@ -1,5 +1,6 @@
 package com.example.SpringBoot.Services;
 
+import com.example.SpringBoot.Data.GradesDAOImpl;
 import com.example.SpringBoot.Entities.Grade;
 import com.example.SpringBoot.Entities.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,32 +17,32 @@ import java.util.List;
 @Service
 public class GradeServices {
 
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private GradesDAOImpl gradesDAOImpl;
 
     public List<Grade> getAllGrades() {
-        String query = "SELECT * FROM grades";
-        return jdbcTemplate.query(query, new GradeRowMapper());
+        return gradesDAOImpl.getAllGrades();
     }
 
     public Grade getGradeById(int gradeId) {
-        String query = "SELECT * FROM grades WHERE grade_id = ?";
-        return jdbcTemplate.queryForObject(query, new Object[]{gradeId}, new GradeRowMapper());
+        return gradesDAOImpl.getGradeById(gradeId);
     }
 
-    public void addGrade(Grade grade) {
-        String query = "INSERT INTO grades (student_id, course_id, grade) VALUES (?, ?, ?)";
-        jdbcTemplate.update(query, grade.getStudentId(), grade.getCourseId(), grade.getGrade());
+    public double getClassAverage() {
+        return gradesDAOImpl.getClassAverage();
     }
 
-    public void updateGrade(Grade grade) {
-        String query = "UPDATE grades SET student_id = ?, course_id = ?, grade = ? WHERE grade_id = ?";
-        jdbcTemplate.update(query, grade.getStudentId(), grade.getCourseId(), grade.getGrade(), grade.getGradeId());
+    public double getClassMedian() {
+        return gradesDAOImpl.getClassMedian();
     }
 
-    public void deleteGrade(int gradeId) {
-        String query = "DELETE FROM grades WHERE grade_id = ?";
-        jdbcTemplate.update(query, gradeId);
+    public Grade getHighestGrade() {
+        return gradesDAOImpl.getHighestGrade();
+    }
+
+    public Grade getLowestGrade() {
+        return gradesDAOImpl.getLowestGrade();
     }
 
 
@@ -79,23 +80,3 @@ public class GradeServices {
         }
     }
 }
-//    public double getClassAverage() {
-//        String query = "SELECT AVG(grade) FROM grades";
-//        return jdbcTemplate.queryForObject(query, Double.class);
-//    }
-//
-//    public double getClassMedian() {
-//        // Assuming SQL query to calculate median, as it varies depending on database
-//        String query = "SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY grade) FROM grades";
-//        return jdbcTemplate.queryForObject(query, Double.class);
-//    }
-//
-//    public Grade getHighestGrade() {
-//        String query = "SELECT * FROM grades ORDER BY grade DESC LIMIT 1";
-//        return jdbcTemplate.queryForObject(query, new GradeRowMapper());
-//    }
-//
-//    public Grade getLowestGrade() {
-//        String query = "SELECT * FROM grades ORDER BY grade ASC LIMIT 1";
-//        return jdbcTemplate.queryForObject(query, new GradeRowMapper());
-//    }
