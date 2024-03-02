@@ -69,6 +69,34 @@
             });
     }
 </script>
+<h2>Grades Statistics</h2>
+<!-- Display statistics like class average, median, highest, and lowest marks here -->
+<!--<p>Class Average: ${classAverage}</p>-->
+<!--<p>Median: ${median}</p>-->
+<!--<p>Highest Mark: ${highestMark}</p>-->
+<!--<p>Lowest Mark: ${lowestMark}</p>-->
+</body>
+
+<h2>Get grade by Id</h2>
+<form id="getGradeByIdForm" onsubmit="return redirectToGradeById()">
+    <label for="gradeById">Grade ID:</label>
+    <input type="text" id="gradeById" name="gradeId">
+    <button type="submit">Get Grade</button>
+</form>
+
+<script>
+    function redirectToGradeById() {
+        const gradeId = document.getElementById("gradeById").value;
+        if (gradeId) {
+            window.location.href = `/api/dao/grades/${gradeId}`;
+            return false; // Prevent form submission
+        } else {
+            alert("Please enter a Grade ID.");
+            return false; // Prevent form submission
+        }
+    }
+</script>
+
 
 <h2>Class Statistics</h2>
 <form action="/api/instructors/statistics" method="get">

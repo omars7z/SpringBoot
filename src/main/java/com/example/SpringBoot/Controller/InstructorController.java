@@ -47,6 +47,7 @@ public class InstructorController {
         return "redirect:/api/instructors";
     }
 
+
     @GetMapping("/statistics")
     public String getStatistics(Model model) {
         double classAverage = gradeServices.getClassAverage();

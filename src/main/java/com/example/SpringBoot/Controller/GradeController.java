@@ -41,7 +41,7 @@ public class GradeController {
             return "gradesnotfound";
         }
     }
-
+}
 //    @GetMapping("/statistics")
 //    public String getStatistics(Model model) {
 //        double classAverage = gradeServices.getClassAverage();
@@ -56,4 +56,4 @@ public class GradeController {
 //
 //        return "statistics"; // statistics.html in views folder
 //    }
-}
+

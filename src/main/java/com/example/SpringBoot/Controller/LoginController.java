@@ -24,8 +24,8 @@ public class LoginController {
     //make a dao method find id by name, service as a bridge,
     //put servlet in parameter, getsession()
 
-//    HttpSession session = request.getSession();
-//    session.getAttribute("userId")
+    //HttpSession session = request.getSession();
+    //session.getAttribute("userId")
     @PostMapping("/login")
     public String handleLogin(String username, String password, Model model, HttpServletRequest request) {
         User user = loginService.authenticate(username, password);
