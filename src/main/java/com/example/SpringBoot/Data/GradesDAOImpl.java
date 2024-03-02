@@ -29,6 +29,11 @@ public class GradesDAOImpl implements GradesDAO {
         return grades.isEmpty() ? null : grades.get(0);
     }
 
+    @Override
+    public List<Grade> getGradesByStudentId(int studentId) {
+        String query = "SELECT * FROM grades WHERE student_id = ?";
+        return jdbcTemplate.query(query, new Object[]{studentId}, new GradeRowMapper());
+    }
 
     @Override
     public void addGrade(Grade grade) {
@@ -46,11 +51,6 @@ public class GradesDAOImpl implements GradesDAO {
     public void deleteGrade(int gradeId) {
         String query = "DELETE FROM grades WHERE grade_id = ?";
         jdbcTemplate.update(query, gradeId);
-    }
-    @Override
-    public List<Grade> getGradesByStudentId(int studentId) {
-        String query = "SELECT * FROM grades WHERE student_id = ?";
-        return jdbcTemplate.query(query, new Object[]{studentId}, new GradeRowMapper());
     }
 
 

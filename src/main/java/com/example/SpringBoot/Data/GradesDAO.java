@@ -16,6 +16,7 @@ public interface GradesDAO {
     Grade getGradeById(int gradeId);
 
     List<Grade> getGradesByStudentId(int studentId);
+
     double getClassAverage();
 
     double getClassMedian();

@@ -42,7 +42,6 @@ public class GradeController {
         }
     }
 
-
 //    @GetMapping("/statistics")
 //    public String getStatistics(Model model) {
 //        double classAverage = gradeServices.getClassAverage();

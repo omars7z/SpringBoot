@@ -69,11 +69,9 @@
             });
     }
 </script>
-<h2>Grades Statistics</h2>
-<!-- Display statistics like class average, median, highest, and lowest marks here -->
-<!--<p>Class Average: ${classAverage}</p>-->
-<!--<p>Median: ${median}</p>-->
-<!--<p>Highest Mark: ${highestMark}</p>-->
-<!--<p>Lowest Mark: ${lowestMark}</p>-->
-</body>
+
+<h2>Class Statistics</h2>
+<form action="/api/instructors/statistics" method="get">
+    <input type="submit" value="View Class Statistics">
+</form>
 </html>

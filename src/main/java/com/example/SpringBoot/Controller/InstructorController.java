@@ -7,6 +7,7 @@ import com.example.SpringBoot.Services.GradeServices;
 import com.example.SpringBoot.Services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -44,5 +45,20 @@ public class InstructorController {
     public String deleteGrade(@PathVariable("gradeId") int gradeId) {
         instructorService.deleteGrade(gradeId);
         return "redirect:/api/instructors";
+    }
+
+    @GetMapping("/statistics")
+    public String getStatistics(Model model) {
+        double classAverage = gradeServices.getClassAverage();
+//        double classMedian = gradeServices.getClassMedian();
+        Grade highestGrade = gradeServices.getHighestGrade();
+        Grade lowestGrade = gradeServices.getLowestGrade();
+
+        model.addAttribute("classAverage", classAverage);
+//        model.addAttribute("classMedian", classMedian);
+        model.addAttribute("highestGrade", highestGrade);
+        model.addAttribute("lowestGrade", lowestGrade);
+
+        return "statistics"; // statistics.html in views folder
     }
 }
