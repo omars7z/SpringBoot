@@ -5,6 +5,7 @@ public class Grade {
     private int studentId;
     private int courseId;
     private double grade;
+    private String courseName;
 
     // Constructors
     public Grade() {

@@ -19,6 +19,18 @@
     <button type="submit">Add Grade</button>
 </form>
 
+<script>
+    let h2Count = 1;
+    function numberH2() {
+        const h2Elements = document.querySelectorAll('h2');
+        h2Elements.forEach((element) => {
+            element.textContent = h2Count + '. ' + element.textContent;
+            h2Count++;
+        });
+    }
+    window.onload = numberH2;
+</script>
+
 <h2>Update Grade</h2>
 
 <!-- Form to update a grade -->
@@ -36,17 +48,17 @@
 
 <!-- Form to delete a grade -->
 <form id="deleteGradeForm">
-    <label for="gradeId">Grade ID:</label>
-    <input type="text" id="gradeId" name="gradeId">
+    <label for="gradeIdToDelete">Grade ID:</label>
+    <input type="text" id="gradeIdToDelete" name="gradeId">
     <button type="button" onclick="deleteGrade()">Delete Grade</button>
 </form>
 
 <script>
     function deleteGrade() {
-        const gradeIdToDelete = document.getElementById("gradeId").value;
+        const gradeIdToDelete = document.getElementById("gradeIdToDelete").value;
 
         if (!gradeIdToDelete) {
-            alert("Please enter a Grade ID to delete.");
+            alert("Enter a Grade ID to delete.");
             return;
         }
         fetch(`/api/instructors/grades/${gradeIdToDelete}`, {
@@ -66,40 +78,30 @@
                 alert('Delete successful');
             })
             .catch(error => {
+                console.error('Error deleting grade:', error);
+                alert('Error deleting grade');
             });
     }
 </script>
-<h2>Grades Statistics</h2>
-<!-- Display statistics like class average, median, highest, and lowest marks here -->
-<!--<p>Class Average: ${classAverage}</p>-->
-<!--<p>Median: ${median}</p>-->
-<!--<p>Highest Mark: ${highestMark}</p>-->
-<!--<p>Lowest Mark: ${lowestMark}</p>-->
-</body>
 
-<h2>Get grade by Id</h2>
-<form id="getGradeByIdForm" onsubmit="return redirectToGradeById()">
-    <label for="gradeById">Grade ID:</label>
-    <input type="text" id="gradeById" name="gradeId">
-    <button type="submit">Get Grade</button>
+<h2>Get grades by Student Id</h2>
+<form action="/api/instructors/grades" method="get">
+    <label for="gradeByStudentId">Student ID:</label>
+    <input type="text" id="gradeByStudentId" name="studentId">
+    <button type="submit">Get Grades</button>
 </form>
 
-<script>
-    function redirectToGradeById() {
-        const gradeId = document.getElementById("gradeById").value;
-        if (gradeId) {
-            window.location.href = `/api/dao/grades/${gradeId}`;
-            return false; // Prevent form submission
-        } else {
-            alert("Please enter a Grade ID.");
-            return false; // Prevent form submission
-        }
-    }
-</script>
-
+<h2>Get grade by Grade Id</h2>
+<form id="getGradeByIdForm" action="/api/instructors/grade" method="get">
+    <label for="gradeId">Grade ID:</label>
+    <input type="text" id="gradeId" name="gradeId">
+    <button type="submit">Get Grade</button>
+</form>
 
 <h2>Class Statistics</h2>
 <form action="/api/instructors/statistics" method="get">
     <input type="submit" value="View Class Statistics">
 </form>
+
+</body>
 </html>

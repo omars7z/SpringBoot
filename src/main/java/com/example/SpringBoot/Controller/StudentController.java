@@ -33,6 +33,17 @@ public class StudentController {
         model.addAttribute("student", student);
         return "studentDetails"; //  studentDetails.html
     }
+
+//    @PostMapping("/{studentId}/view-grades"){
+//        public String viewGrades(@PathVariable("studentId") int studentId, Model model) {
+//            List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
+//            model.addAttribute("grades", grades);
+//            return "view-grades"; //   view-grades.html
+//        }
+//    }
+
+
+
     @GetMapping("/{studentId}/view-grades")
     public String viewGrades(@PathVariable("studentId") int studentId, Model model) {
         List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
@@ -41,30 +52,30 @@ public class StudentController {
     }
 
 
-//    @GetMapping("/{studentId}/grades")
-//    public String getStudentGrades(@PathVariable("studentId") int studentId, Model model) {
-//        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
-//        model.addAttribute("grades", grades);
-//        return "view-grades"; // view-grades.html
-//    }
-
     @GetMapping("/{studentId}/grades")
     public String getStudentGrades(@PathVariable("studentId") int studentId, Model model) {
-        try {
-            List<Grade> grade = (List<Grade>) gradeServices.getGradesByStudentId(studentId);
-            if (grade != null) {
-                model.addAttribute("grade", grade);
-                String mapRowString = "Details of mapRow method"; // Populate mapRowString with actual details
-                model.addAttribute("mapRowString", mapRowString);
-                return "gradesbyid";
-            } else {
-                return "gradesnotfound";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "gradesnotfound";
-        }
+        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
+        model.addAttribute("grades", grades);
+        return "gradesbyid"; // view-grades.html
     }
+
+//    @GetMapping("/{studentId}/grades")
+//    public String getStudentGrades(@PathVariable("studentId") int studentId, Model model) {
+//        try {
+//            List<Grade> grade = (List<Grade>) gradeServices.getGradesByStudentId(studentId);
+//            if (grade != null) {
+//                model.addAttribute("grade", grade);
+//                String mapRowString = "Details of mapRow method";
+//                model.addAttribute("mapRowString", mapRowString);
+//                return "gradesbyid";
+//            } else {
+//                return "gradesnotfound";
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "gradesnotfound";
+//        }
+//    }
     @GetMapping("/statistics")
     public String getStatistics(Model model) {
         double classAverage = gradeServices.getClassAverage();

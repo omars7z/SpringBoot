@@ -1,5 +1,7 @@
 package com.example.SpringBoot.Controller;
 
+import com.example.SpringBoot.Entities.Grade;
+import com.example.SpringBoot.Entities.Student;
 import com.example.SpringBoot.Entities.User;
 import com.example.SpringBoot.Security.Authentication;
 import com.example.SpringBoot.Services.LoginService;
@@ -37,6 +39,7 @@ public class LoginController {
             String redirectUrl = determineUrl(user.getRole());
             System.out.println(user.getRole());
             System.out.println(redirectUrl);
+//            model.addAttribute("studets", new Student() );
             return "redirect:" + redirectUrl; //redirect based on role
         } else {
             return "redirect:/fail-login";

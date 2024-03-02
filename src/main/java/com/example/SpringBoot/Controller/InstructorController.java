@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/api/instructors")
 public class InstructorController {
@@ -45,6 +47,31 @@ public class InstructorController {
     public String deleteGrade(@PathVariable("gradeId") int gradeId) {
         instructorService.deleteGrade(gradeId);
         return "redirect:/api/instructors";
+    }
+
+    @GetMapping("/grades") // Differentiate the mapping path for this method
+    public String getGradesByStudentId(@RequestParam("studentId") int studentId, Model model) {
+        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
+        model.addAttribute("grades", grades);
+        return "view-grades";
+    }
+
+    @GetMapping("/grade") // Different mapping path for this method
+    public String getGradeById(@RequestParam("gradeId") int gradeId, Model model) {
+        try {
+            Grade grade = gradeServices.getGradeById(gradeId);
+            if (grade != null) {
+                model.addAttribute("grade", grade);
+                String mapRowString = "Details of mapRow method"; // Populate mapRowString with actual details
+                model.addAttribute("mapRowString", mapRowString);
+                return "gradesbyid";
+            } else {
+                return "gradesnotfound";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "gradesnotfound";
+        }
     }
 
 
