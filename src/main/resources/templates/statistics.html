@@ -9,19 +9,35 @@
 <h1>Class Statistics</h1>
 
 <p>Class Average: <span th:text="${classAverage}"></span></p>
-<p>Class Median: <span th:text="${classMedian}"></span></p>
+<!--<p>Class Median: <span th:text="${classMedian}"></span></p>-->
 <p>Highest Grade:</p>
 <ul>
     <li>Grade ID: <span th:text="${highestGrade.gradeId}"></span></li>
     <li>Student ID: <span th:text="${highestGrade.studentId}"></span></li>
-    <li>Course ID: <span th:text="${highestGrade.courseId}"></span></li>
+    <li>Course ID: <span th:text="${highestGrade.courseId}"></span> -
+        <span th:switch="${highestGrade.courseId}">
+            <span th:case="1">Mathematics</span>
+            <span th:case="2">Science</span>
+            <span th:case="3">History</span>
+            <span th:case="4">Software</span>
+            <span th:case="*" th:text="${'Unknown Course: ' + highestGrade.courseId}"></span>
+        </span>
+    </li>
     <li>Grade: <span th:text="${highestGrade.grade}"></span></li>
 </ul>
 <p>Lowest Grade:</p>
 <ul>
     <li>Grade ID: <span th:text="${lowestGrade.gradeId}"></span></li>
     <li>Student ID: <span th:text="${lowestGrade.studentId}"></span></li>
-    <li>Course ID: <span th:text="${lowestGrade.courseId}"></span></li>
+    <li>Course ID: <span th:text="${lowestGrade.courseId}"></span> -
+        <span th:switch="${lowestGrade.courseId}">
+            <span th:case="1">Mathematics</span>
+            <span th:case="2">Science</span>
+            <span th:case="3">History</span>
+            <span th:case="4">Software</span>
+            <span th:case="*" th:text="${'Unknown Course: ' + lowestGrade.courseId}"></span>
+        </span>
+    </li>
     <li>Grade: <span th:text="${lowestGrade.grade}"></span></li>
 </ul>
 </body>

@@ -6,6 +6,7 @@
     <title>View Grades</title>
 </head>
 <body>
+
 <h1>Your Grades</h1>
 
 <table border="1">
@@ -14,6 +15,7 @@
         <th>Grade ID</th>
         <th>Student ID</th>
         <th>Course ID</th>
+        <th>Course Name</th>
         <th>Grade</th>
     </tr>
     </thead>
@@ -23,6 +25,17 @@
         <td th:text="${grade.gradeId}"></td>
         <td th:text="${grade.studentId}"></td>
         <td th:text="${grade.courseId}"></td>
+        <td>
+            <!-- Add logic here to map course ID to course name -->
+            <!-- Assuming courseId 1 corresponds to Mathematics, 2 to Science, 3 to History, and 4 to Software -->
+            <span th:switch="${grade.courseId}">
+                <span th:case="1">Mathematics</span>
+                <span th:case="2">Science</span>
+                <span th:case="3">History</span>
+                <span th:case="4">Software</span>
+                <span th:case="*" th:text="${'Unknown Course: ' + grade.courseId}"></span>
+            </span>
+        </td>
         <td th:text="${grade.grade}"></td>
     </tr>
     </tbody>

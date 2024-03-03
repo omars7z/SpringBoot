@@ -1,10 +1,12 @@
 package com.example.SpringBoot.Controller;
 
 import com.example.SpringBoot.Entities.Grade;
+import com.example.SpringBoot.Entities.Student;
 import com.example.SpringBoot.Security.Credentials;
 
 import com.example.SpringBoot.Services.GradeServices;
 import com.example.SpringBoot.Services.InstructorService;
+import com.example.SpringBoot.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class InstructorController {
 
     @Autowired
     private GradeServices gradeServices;
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping("")
     public String showLoginForm(){
@@ -59,18 +63,28 @@ public class InstructorController {
 
     @GetMapping("/grades")
     public String getGradesByStudentId(@RequestParam("studentId") int studentId, Model model) {
-        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
-        model.addAttribute("grades", grades);
-        return "view-grades";
+        try {
+            Student student = studentService.getStudentById(studentId);
+            if (student != null) {
+                model.addAttribute("student", student);
+                return "view-grades";
+            } else {
+                return "studentnotfound";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "studentnotfound";
+        }
     }
 
-    @GetMapping("/grade") // Different mapping path for this method
+
+    @GetMapping("/grade") // different mapping path for this method
     public String getGradeById(@RequestParam("gradeId") int gradeId, Model model) {
         try {
             Grade grade = gradeServices.getGradeById(gradeId);
             if (grade != null) {
                 model.addAttribute("grade", grade);
-                String mapRowString = "Details of mapRow method"; // Populate mapRowString with actual details
+                String mapRowString = "Details of mapRow method";
                 model.addAttribute("mapRowString", mapRowString);
                 return "gradesbyid";
             } else {

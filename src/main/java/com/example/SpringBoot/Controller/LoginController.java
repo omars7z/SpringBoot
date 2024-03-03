@@ -35,6 +35,7 @@ public class LoginController {
             session.setAttribute("studentId", studentId);
             authentication.setAuthenticatedUsername(username);
             model.addAttribute("user", user);
+            model.addAttribute("studentId",authentication.getAuthenticatedUsername() );
             model.addAttribute("id", authentication.getAuthenticatedId());
             return "students";
         } else {
@@ -55,7 +56,7 @@ public class LoginController {
 
 
     private int determineStudentId() {
-        String username = authentication.getAuthenticatedUsername(); // Get the authenticated username
+        String username = authentication.getAuthenticatedUsername(); // get the authenticated username
         Student student = studentService.getStudentByUsername(username);
         return student != null ? student.getStudentId() : -1;
     }
@@ -66,7 +67,7 @@ public class LoginController {
             case "Student" -> "/api/students";
             case "Instructor" -> "/api/instructors";
             case "Admin" -> "/api/admin";
-            default -> "/";
+            default -> "/fail-login";
         };
     }
 }

@@ -20,7 +20,7 @@ public class GradeController {
     public String getAllGrades(Model model) {
         List<Grade> grades = gradeServices.getAllGrades();
         model.addAttribute("grades", grades);
-        return "grades"; // grades.html in views folder
+        return "grades"; // grades.html
     }
 
     @GetMapping("/gradeByIdForm")

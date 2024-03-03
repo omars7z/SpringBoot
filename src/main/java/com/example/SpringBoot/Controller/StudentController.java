@@ -36,33 +36,30 @@ public class StudentController {
         return "studentDetails"; //  studentDetails.html
     }
 
+
+    @GetMapping("/grades")
+    public String getGradesByStudentId(@RequestParam("studentId") int studentId, Model model) {
+        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
+        model.addAttribute("grades", grades);
+        return "view-grades";
+    }
     @GetMapping("/{studentId}/view-grades")
     public String viewGrades(@PathVariable("studentId") int studentId, Model model) {
         List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
         model.addAttribute("grades", grades);
-        return "view-grades"; //   view-grades.html
-    }
-
-
-    @GetMapping("/{studentId}/grades")
-    public String getStudentGrades(@PathVariable("studentId") int studentId, Model model) {
-        List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
-        model.addAttribute("grades", grades);
-        return "gradesbyid"; // view-grades.html
+        return "view-grades"; // view-grades.html
     }
 
     @GetMapping("/statistics")
     public String getStatistics(Model model) {
         double classAverage = gradeServices.getClassAverage();
-//        double classMedian = gradeServices.getClassMedian();
         Grade highestGrade = gradeServices.getHighestGrade();
         Grade lowestGrade = gradeServices.getLowestGrade();
 
         model.addAttribute("classAverage", classAverage);
-//        model.addAttribute("classMedian", classMedian);
         model.addAttribute("highestGrade", highestGrade);
         model.addAttribute("lowestGrade", lowestGrade);
 
-        return "statistics"; // statistics.html in views folder
+        return "statistics"; // statistics.html
     }
 }
