@@ -7,10 +7,16 @@
 </head>
 <body>
 <h1>Welcome to the Student Dashboard</h1>
-<a href="/api/students/${studentId}" class="button">View Student Details</a>
+
+<h2>Student Details</h2>
+<form action="/api/students/details" method="get">
+    <input type="text" name="studentId" placeholder="Enter Student ID">
+    <input type="submit" value="View Student Details">
+</form>
 
 <h2>Select Your Grades to View</h2>
-<form action="/api/students/${studentId}/grades" method="get">
+<form action="/api/students/${studentId}/view-grades" method="get">
+    <input type="text" name="studentId" placeholder="Enter Student ID">
     <input type="submit" value="View Your Grades">
 </form>
 

@@ -39,17 +39,16 @@
             <th>Grade</th>
             <th>Actions</th>
         </tr>
-        <!-- Populate table with grades -->
-        <tr th:each="grade : ${grades}">
-            <td th:text="${grade.gradeId}"></td>
-            <td th:text="${grade.grade}"></td>
+        <tr>
+            <td>1</td>
+            <td>85</td>
             <td>
-                <form action="/api/dao/grades/{gradeId}" method="post">
+                <form action="/api/dao/grades/1" method="post">
                     <input type="hidden" name="_method" value="PUT">
-                    <input type="number" name="grade" value="${grade.grade}">
+                    <input type="number" name="grade" value="85">
                     <button type="submit">Update</button>
                 </form>
-                <form action="/api/dao/grades/{gradeId}" method="post">
+                <form action="/api/dao/grades/1" method="post">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit">Delete</button>
                 </form>
@@ -58,10 +57,10 @@
     </table>
 
     <h3>Class Statistics</h3>
-    <p>Class Average: <span th:text="${classAverage}"></span></p>
-    <p>Class Median: <span th:text="${classMedian}"></span></p>
-    <p>Highest Grade: <span th:text="${highestGrade.grade}"></span></p>
-    <p>Lowest Grade: <span th:text="${lowestGrade.grade}"></span></p>
+    <p>Class Average: <span>80</span></p>
+    <p>Class Median: <span>75</span></p>
+    <p>Highest Grade: <span>95</span></p>
+    <p>Lowest Grade: <span>60</span></p>
 </div>
 </body>
 </html>

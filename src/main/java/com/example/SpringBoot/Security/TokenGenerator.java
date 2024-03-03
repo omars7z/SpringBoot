@@ -2,6 +2,9 @@ package com.example.SpringBoot.Security;
 
 import java.util.Base64;
 
+
+// my JDK 21 has configration errors, i tried very long to fix it but not working in any way
+
 public class TokenGenerator {
 
     // Secret key for token generation

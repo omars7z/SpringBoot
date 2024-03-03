@@ -2,9 +2,11 @@ package com.example.SpringBoot.Controller;
 
 import com.example.SpringBoot.Entities.Grade;
 import com.example.SpringBoot.Entities.Student;
+import com.example.SpringBoot.Security.Authentication;
 import com.example.SpringBoot.Services.GradeServices;
 import com.example.SpringBoot.Services.StudentService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +29,8 @@ public class StudentController {
         return "students";
     }
 
-    @GetMapping("/{studentId}")
-    public String getStudentById(@PathVariable("studentId") int studentId, Model model) {
+    @GetMapping("/details")
+    public String getStudentById(@RequestParam("studentId") int studentId, Model model) {
         Student student = studentService.getStudentById(studentId);
         model.addAttribute("student", student);
         return "studentDetails"; //  studentDetails.html
@@ -49,23 +51,6 @@ public class StudentController {
         return "gradesbyid"; // view-grades.html
     }
 
-//    @GetMapping("/{studentId}/grades")
-//    public String getStudentGrades(@PathVariable("studentId") int studentId, Model model) {
-//        try {
-//            List<Grade> grade = (List<Grade>) gradeServices.getGradesByStudentId(studentId);
-//            if (grade != null) {
-//                model.addAttribute("grade", grade);
-//                String mapRowString = "Details of mapRow method";
-//                model.addAttribute("mapRowString", mapRowString);
-//                return "gradesbyid";
-//            } else {
-//                return "gradesnotfound";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "gradesnotfound";
-//        }
-//    }
     @GetMapping("/statistics")
     public String getStatistics(Model model) {
         double classAverage = gradeServices.getClassAverage();

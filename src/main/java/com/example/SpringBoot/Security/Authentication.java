@@ -17,7 +17,7 @@ public class Authentication {
     private boolean isAuthenticated = false;
     private int authenticatedId = -1;
     private String authenticatedName = "";
-    private String authenticatedUsername = ""; // Initialize directly with an empty string
+    private String authenticatedUsername = "";
     private List<String> authenticatedUsernames;
 
     @Autowired

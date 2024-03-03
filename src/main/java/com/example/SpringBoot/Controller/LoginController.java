@@ -36,7 +36,7 @@ public class LoginController {
             authentication.setAuthenticatedUsername(username);
             model.addAttribute("user", user);
             model.addAttribute("id", authentication.getAuthenticatedId());
-            return "redirect:/api/students";
+            return "students";
         } else {
             String redirectUrl = determineUrl(user != null ? user.getRole() : "fail-login");
             return "redirect:" + redirectUrl;
@@ -52,6 +52,7 @@ public class LoginController {
     public String showFailLoginForm(){
         return "fail-login";
     }
+
 
     private int determineStudentId() {
         String username = authentication.getAuthenticatedUsername(); // Get the authenticated username

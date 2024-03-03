@@ -7,7 +7,6 @@ public class Student {
     private String username;
     private String password;
 
-    // Constructors
     public Student() {
     }
 
@@ -17,7 +16,6 @@ public class Student {
         this.password = password;
     }
 
-    // Getters and setters
     public int getStudentId() {
         return studentId;
     }
