@@ -2,6 +2,7 @@ package com.example.SpringBoot.Data;
 
 import com.example.SpringBoot.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -20,11 +21,25 @@ public class LoginDAOImpl implements LoginDAO {
     public User authenticate(String username, String password) {
         String query = "SELECT * FROM users WHERE username = ? AND password = ?";
         List<User> users = jdbcTemplate.query(query, new Object[]{username, password}, new UserRowMapper());
+        return users.isEmpty() ? null : users.get(0);
+    }
 
-        // Check if any user was found
-        if (!users.isEmpty()) {
-            return users.get(0);
-        } else {
+    @Override
+    public User getAdminByUsername(String username) {
+        try {
+            String query = "SELECT * FROM admins WHERE username = ?";
+            return jdbcTemplate.queryForObject(query, new Object[]{username}, new UserRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public User getInstructorByUsername(String username) {
+        try {
+            String query = "SELECT * FROM instructors WHERE username = ?";
+            return jdbcTemplate.queryForObject(query, new Object[]{username}, new UserRowMapper());
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }

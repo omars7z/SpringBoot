@@ -33,10 +33,10 @@ public class LoginController {
             HttpSession session = request.getSession();
             int studentId = determineStudentId();
             session.setAttribute("studentId", studentId);
-            authentication.setAuthenticatedUsername(username); // Set the authenticated username
+            authentication.setAuthenticatedUsername(username);
             model.addAttribute("user", user);
             model.addAttribute("id", authentication.getAuthenticatedId());
-            return "redirect:/api/students"; // Redirect to the student dashboard
+            return "redirect:/api/students";
         } else {
             String redirectUrl = determineUrl(user != null ? user.getRole() : "fail-login");
             return "redirect:" + redirectUrl;
@@ -54,9 +54,9 @@ public class LoginController {
     }
 
     private int determineStudentId() {
-        String username = authentication.getAuthenticatedUsername(); // Get the authenticated username directly
+        String username = authentication.getAuthenticatedUsername(); // Get the authenticated username
         Student student = studentService.getStudentByUsername(username);
-        return student != null ? student.getStudentId() : -1; // Assuming -1 as default if student not found
+        return student != null ? student.getStudentId() : -1;
     }
 
 
