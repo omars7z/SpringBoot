@@ -57,7 +57,7 @@ public class InstructorController {
         }
     }
 
-    @GetMapping("/grades") // Differentiate the mapping path for this method
+    @GetMapping("/grades")
     public String getGradesByStudentId(@RequestParam("studentId") int studentId, Model model) {
         List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
         model.addAttribute("grades", grades);
