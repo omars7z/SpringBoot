@@ -5,6 +5,7 @@ import com.example.SpringBoot.Entities.Student;
 import com.example.SpringBoot.Entities.User;
 import com.example.SpringBoot.Security.Authentication;
 import com.example.SpringBoot.Services.LoginService;
+import com.example.SpringBoot.Services.StudentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +23,23 @@ public class LoginController {
     private LoginService loginService;
     @Autowired
     private Authentication authentication;
+    @Autowired
+    private StudentService studentService;
 
-    //make a dao method find id by name, service as a bridge,
-    //put servlet in parameter, getsession()
-
-    //HttpSession session = request.getSession();
-    //session.getAttribute("userId")
     @PostMapping("/login")
     public String handleLogin(String username, String password, Model model, HttpServletRequest request) {
         User user = loginService.authenticate(username, password);
-        if (user != null) {
+        if (user != null && user.getRole().equals("Student")) {
             HttpSession session = request.getSession();
-//            session.setAttribute("userId", userId);
+            int studentId = determineStudentId();
+            session.setAttribute("studentId", studentId);
+            authentication.setAuthenticatedUsername(username); // Set the authenticated username
             model.addAttribute("user", user);
             model.addAttribute("id", authentication.getAuthenticatedId());
-            String redirectUrl = determineUrl(user.getRole());
-            System.out.println(user.getRole());
-            System.out.println(redirectUrl);
-//            model.addAttribute("studets", new Student() );
-            return "redirect:" + redirectUrl; //redirect based on role
+            return "redirect:/api/students"; // Redirect to the student dashboard
         } else {
-            return "redirect:/fail-login";
+            String redirectUrl = determineUrl(user != null ? user.getRole() : "fail-login");
+            return "redirect:" + redirectUrl;
         }
     }
 
@@ -56,6 +53,13 @@ public class LoginController {
         return "fail-login";
     }
 
+    private int determineStudentId() {
+        String username = authentication.getAuthenticatedUsername(); // Get the authenticated username directly
+        Student student = studentService.getStudentByUsername(username);
+        return student != null ? student.getStudentId() : -1; // Assuming -1 as default if student not found
+    }
+
+
     private String determineUrl(String role) {
         return switch (role) {
             case "Student" -> "/api/students";
@@ -64,5 +68,4 @@ public class LoginController {
             default -> "/";
         };
     }
-
 }

@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Grades and Statistics</title>
+    <title>Student Dashboard</title>
 </head>
 <body>
-<h1>Welcome to Student Grades and Statistics</h1>
+<h1>Welcome to the Student Dashboard</h1>
+<a href="/api/students/${studentId}" class="button">View Student Details</a>
 
 <h2>Select Your Grades to View</h2>
 <form action="/api/students/${studentId}/grades" method="get">
     <input type="submit" value="View Your Grades">
 </form>
-
 
 <h2>Class Statistics</h2>
 <form action="/api/students/statistics" method="get">

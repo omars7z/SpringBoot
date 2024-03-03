@@ -23,4 +23,5 @@ public class AdminDAOImpl implements AdminDAO {
         String query = "DELETE FROM users WHERE id = ?";
         jdbcTemplate.update(query, userId);
     }
+
 }

@@ -25,9 +25,13 @@ public class StudentService {
     public Student getStudentById(int studentId) {
         return studentDAO.getStudentById(studentId);
     }
+    public Student getStudentByUsername(String username) {
+        return studentDAO.getStudentByUsername(username);
+    }
 
     public Grade getGradeById(int gradeId) {
         return gradesDAOImpl.getGradeById(gradeId);
     }
+
 
 }
