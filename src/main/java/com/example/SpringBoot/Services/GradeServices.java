@@ -80,15 +80,15 @@ public class GradeServices {
         }
     }
 
-    private static class GradeRowMapper implements RowMapper<Grade> {
-        @Override
-        public Grade mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Grade grade = new Grade();
-            grade.setGradeId(rs.getInt("grade_id"));
-            grade.setStudentId(rs.getInt("student_id"));
-            grade.setCourseId(rs.getInt("course_id"));
-            grade.setGrade(rs.getDouble("grade"));
-            return grade;
-        }
-    }
+//    private static class GradeRowMapper implements RowMapper<Grade> {
+//        @Override
+//        public Grade mapRow(ResultSet rs, int rowNum) throws SQLException {
+//            Grade grade = new Grade();
+//            grade.setGradeId(rs.getInt("grade_id"));
+//            grade.setStudentId(rs.getInt("student_id"));
+//            grade.setCourseId(rs.getInt("course_id"));
+//            grade.setGrade(rs.getDouble("grade"));
+//            return grade;
+//        }
+//    }
 }

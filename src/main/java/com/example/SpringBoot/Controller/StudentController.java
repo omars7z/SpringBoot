@@ -34,16 +34,6 @@ public class StudentController {
         return "studentDetails"; //  studentDetails.html
     }
 
-//    @PostMapping("/{studentId}/view-grades"){
-//        public String viewGrades(@PathVariable("studentId") int studentId, Model model) {
-//            List<Grade> grades = gradeServices.getGradesByStudentId(studentId);
-//            model.addAttribute("grades", grades);
-//            return "view-grades"; //   view-grades.html
-//        }
-//    }
-
-
-
     @GetMapping("/{studentId}/view-grades")
     public String viewGrades(@PathVariable("studentId") int studentId, Model model) {
         List<Grade> grades = gradeServices.getGradesByStudentId(studentId);

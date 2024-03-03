@@ -6,6 +6,7 @@ import com.example.SpringBoot.Security.Credentials;
 import com.example.SpringBoot.Services.GradeServices;
 import com.example.SpringBoot.Services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,20 +34,27 @@ public class InstructorController {
         return "redirect:/api/instructors";
     }
 
-    @PutMapping("/grades/{gradeId}")
-    public String updateGrade(@PathVariable("gradeId") int gradeId, @RequestBody Grade updatedGrade) {
+    @PostMapping("/grades/update")
+    public ResponseEntity<String> updateGrade(@RequestParam("gradeId") int gradeId, @RequestParam("updatedGrade") double updatedGrade) {
         Grade grade = gradeServices.getGradeById(gradeId);
         if (grade != null) {
-            grade.setGrade(updatedGrade.getGrade());
+            grade.setGrade(updatedGrade);
             instructorService.updateGrade(grade);
+            return ResponseEntity.ok("Grade updated successfully");
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return "redirect:/api/instructors";
     }
 
-    @DeleteMapping("/grades/{gradeId}")
-    public String deleteGrade(@PathVariable("gradeId") int gradeId) {
-        instructorService.deleteGrade(gradeId);
-        return "redirect:/api/instructors";
+    @PostMapping("/grades/delete")
+    public ResponseEntity<String> deleteGrade(@RequestParam("gradeId") int gradeId) {
+        Grade grade = gradeServices.getGradeById(gradeId);
+        if (grade != null) {
+            instructorService.deleteGrade(gradeId);
+            return ResponseEntity.ok("Grade deleted successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/grades") // Differentiate the mapping path for this method

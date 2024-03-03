@@ -19,70 +19,25 @@
     <button type="submit">Add Grade</button>
 </form>
 
-<script>
-    let h2Count = 1;
-    function numberH2() {
-        const h2Elements = document.querySelectorAll('h2');
-        h2Elements.forEach((element) => {
-            element.textContent = h2Count + '. ' + element.textContent;
-            h2Count++;
-        });
-    }
-    window.onload = numberH2;
-</script>
-
 <h2>Update Grade</h2>
 
-<!-- Form to update a grade -->
-<form action="../api/instructors/grades/{gradeId}" method="post">
-    <label for="updatedStudentId">Updated Student ID:</label>
-    <input type="text" id="updatedStudentId" name="studentId">
-    <label for="updatedCourseId">Updated Course ID:</label>
-    <input type="text" id="updatedCourseId" name="courseId">
+<form id="updateGradeForm" action="/api/instructors/grades/update" method="post">
+    <label for="gradeIdToUpdate">Grade ID:</label>
+    <input type="text" id="gradeIdToUpdate" name="gradeId">
     <label for="updatedGrade">Updated Grade:</label>
-    <input type="text" id="updatedGrade" name="grade">
+    <input type="text" id="updatedGrade" name="updatedGrade">
     <button type="submit">Update Grade</button>
 </form>
 
-<h2>Delete Grade</h2>
 
-<!-- Form to delete a grade -->
-<form id="deleteGradeForm">
+<h2>Delete Grades</h2>
+
+<form id="deleteGradeForm" action="/api/instructors/grades/delete" method="post">
     <label for="gradeIdToDelete">Grade ID:</label>
     <input type="text" id="gradeIdToDelete" name="gradeId">
-    <button type="button" onclick="deleteGrade()">Delete Grade</button>
+    <button type="submit">Delete Grade</button>
 </form>
 
-<script>
-    function deleteGrade() {
-        const gradeIdToDelete = document.getElementById("gradeIdToDelete").value;
-
-        if (!gradeIdToDelete) {
-            alert("Enter a Grade ID to delete.");
-            return;
-        }
-        fetch(`/api/instructors/grades/${gradeIdToDelete}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Delete successful', data);
-                alert('Delete successful');
-            })
-            .catch(error => {
-                console.error('Error deleting grade:', error);
-                alert('Error deleting grade');
-            });
-    }
-</script>
 
 <h2>Get grades by Student Id</h2>
 <form action="/api/instructors/grades" method="get">
@@ -104,4 +59,15 @@
 </form>
 
 </body>
+<script>
+    let h2Count = 1;
+    function numberH2() {
+        const h2Elements = document.querySelectorAll('h2');
+        h2Elements.forEach((element) => {
+            element.textContent = h2Count + '. ' + element.textContent;
+            h2Count++;
+        });
+    }
+    window.onload = numberH2;
+</script>
 </html>
